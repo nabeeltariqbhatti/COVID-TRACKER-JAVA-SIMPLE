@@ -21,7 +21,10 @@ public class HomeController {
 		
 		
 		int sum =coronaVirusDataService.getAllStats().stream().mapToInt(sat->sat.getLatestTotalCases()).sum();
+		int sumPre =  coronaVirusDataService.getAllStats().stream().mapToInt(sat->sat.getDifferenceFromPreDay()).sum(); 
+		
 		model.addAttribute("totalReportedCases", sum);
+		model.addAttribute("today", sumPre);
 		return "home";
 	}
 

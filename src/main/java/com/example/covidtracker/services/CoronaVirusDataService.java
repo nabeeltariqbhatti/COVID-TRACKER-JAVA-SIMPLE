@@ -1,8 +1,8 @@
 package com.example.covidtracker.services;
 
-import java.beans.JavaBean;
+
 import java.io.IOException;
-import java.io.Reader;
+
 import java.io.StringReader;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+
 import org.springframework.stereotype.Service;
 
 import models.LocationStats;
@@ -62,6 +62,9 @@ public class CoronaVirusDataService {
 		    locationStats.setCountry( record.get("Country/Region"));
 		    
 		    locationStats.setLatestTotalCases(Integer.parseInt(record.get(record.size()-1)));
+		    int diff = Integer.parseInt(record.get(record.size()-1)) - Integer.parseInt(record.get(record.size()-2)) ;
+		    
+		    locationStats.setDifferenceFromPreDay(diff);
 //		    System.out.println(locationStats.toString());
 		    newStats.add(locationStats);
 		}
